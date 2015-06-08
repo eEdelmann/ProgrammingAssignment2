@@ -20,7 +20,6 @@ makeCacheMatrix <- function(x = numeric(), z = 2) {
   b <- getMat(x)
   getInv <- solve(b)
   setInv <- function() {
-    b <<- x
     cacheInv <<- getInv
   }
   setInv()
