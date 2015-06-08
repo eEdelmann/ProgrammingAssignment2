@@ -1,15 +1,49 @@
-## Put comments here that give an overall description of what your
-## functions do
+# makeCacheMatrix
+# This inputs work both with vectors and square matrices
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(x = numeric(), z = 2) {
+  cacheInv <<- NULL
+  # First caches the input
+  setMat <- function(y) {
+    cacheInv <<- NULL
+    cacheMat <<- y
+  }
+  setMat(x)
+  # Creates and caches square matrix when the input is a vector
+  getMat <- function(a) {
+    Matriz <- matrix(a, z, z)
+    # set matrix in cache
+    cacheMat <<- Matriz
+  }
+  # Getting and setting the inverse matrix
+  b <- getMat(x)
+  getInv <- solve(b)
+  setInv <- function() {
+    b <<- x
+    cacheInv <<- getInv
+  }
+  setInv()
+  message("You just cached a matrix!")
+  getInv  
 }
 
 
-## Write a short comment describing this function
+# cacheSolve
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+InvCacheMat <- function(x, ...) {
+  # Calling cached matrix
+  if(identical(x, cacheMat)==TRUE) {
+    message("We're giving you your cached matrix!")
+    return(cacheInv)
+  } else {
+    # Solving uncached matrices
+    getInv <- solve(x)
+    message("We're solving your uncached matrix!")
+    getInv
+  }
 }
+
+
+# Example matrix - jus to make testing easier.
+
+i <- matrix(30:33, 2, 2)
