@@ -11,6 +11,7 @@ makeCacheMatrix <- function(x = numeric(), z = 2) {
   setMat(x)
   # Creates and caches square matrix when the input is a vector
   getMat <- function(a) {
+  # This input z allows the matrix to be always square
     Matriz <- matrix(a, z, z)
     # set matrix in cache
     cacheMat <<- Matriz
